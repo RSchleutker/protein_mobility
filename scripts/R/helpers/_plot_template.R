@@ -1,12 +1,12 @@
-template <- function (subset = TRUE, ...) {
+xyplot_template <- function (data, subset = TRUE, ...) {
   ps <- substitute(subset)
   xyplot(
     Normalized  ~ Time,
-    data = summary,
+    data = data,
     subset = eval(ps),
     groups = Condition,
-    upper = summary$Upper,
-    lower = summary$Lower,
+    upper = data$Upper,
+    lower = data$Lower,
     panel = \(x, y, ...) {
       panel.grid(-1, -1)
       panel.superpose(x, y, panel.groups = panel.error, ...)

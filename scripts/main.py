@@ -1,11 +1,10 @@
-from pybioimage.frap import Analyzer
-from pybioimage.utils import find_files
-
-from pathlib import Path
 import logging
 import logging.config
 from datetime import datetime
+from pathlib import Path
 
+from pybioimage.frap import Analyzer
+from pybioimage.utils import find_files
 
 # Define script constants.
 INPUT: Path = Path("data", "raw")

@@ -4,8 +4,8 @@ library(openxlsx)
 
 ## Define script-wide constants ================================================
 
-INPUT <- "./data/processed/"
-OUTPUT <-"./output/tables/"
+INPUT <- file.path("data", "processed")
+OUTPUT <- file.path("output")
 
 PROTEINS <- c(
   "M6" = "M6",
@@ -24,7 +24,7 @@ CONDITIONS <- c(
 ## Read and process measured intensities =======================================
 
 # Main dataframe.
-intensities <- list.files(INPUT, "intensities", full = T, rec = T) %>%
+data_intensities <- list.files(INPUT, "intensities", full = T, rec = T) %>%
   lapply(read.csv) %>%
   Reduce(f = rbind) %>%
   rename(
@@ -44,7 +44,7 @@ intensities <- list.files(INPUT, "intensities", full = T, rec = T) %>%
   )
 
 # Summarised data containing mean values and standard deviations.
-summary <- intensities %>%
+data_summary <- data_intensities %>%
   group_by(Protein, Expression, Condition, Time) %>%
   summarise(
     Deviation = sd(Normalized),
@@ -59,15 +59,13 @@ summary <- intensities %>%
 
 ## Export cleaned data to CSV and EXCEL ========================================
 
-save(intensities, summary, file = paste0(OUTPUT, "intensities.RData"))
-
-write.csv(intensities, paste0(OUTPUT, "intensities.csv"))
-write.csv(summary, paste0(OUTPUT, "summary.csv"))
+write.csv(data_intensities, file.path(OUTPUT, "tables", "intensities.csv"))
+write.csv(data_summary, file.path(OUTPUT, "tables", "summary.csv"))
 
 write.xlsx(
   list(
-    Intensities = intensities,
-    Summary = summary
+    Intensities = data_intensities,
+    Summary = data_summary
   ),
-  paste0(OUTPUT, "intensities.xlsx")
+  file.path(OUTPUT, "tables", "intensities.xlsx")
 )

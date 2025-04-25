@@ -1,27 +1,13 @@
-library(dplyr)
-library(nlme)
-
-
-## Define script-wide constants ================================================
-
-INPUT <- "./output/tables/intensities.RData"
-
-
-## Load data from .RData file ==================================================
-
-read.csv(INPUT)
-
-
 ## Fit models and calculate statistics =========================================
 
 # Since FORMULA is not linearizable, a non-linear approach was chosen to fit the
 # function to the measured values. However, this does not guarantee to find a
 # solution. Depending on the input values, `nls` might rise an error because it
-# couldn't finda fit for whatever reason. Varying the starting parameters is
+# couldn't find a fit for whatever reason. Varying the starting parameters is
 # crucial here.
 formula <- Normalized ~ A * (1 - exp(-tau * Time))
 
-models <- intensities %>%
+models <- data_intensities %>%
   filter(Protein != "Gliotactin") %>%
   subset(Time >= 0) %>%
   split(~ Protein + Condition, drop = TRUE) %>%
