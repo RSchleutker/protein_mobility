@@ -1,0 +1,26 @@
+[project]
+name = "Protein mobility"
+version = "0.1.0"
+description="Analyze FRAP data from tricellular junctions"
+readme = "README.md"
+authors = [
+    { name = "Raphael Schleutker", email = "raphaelschleutker@gmx.de" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "pybioimage>0.1.0",
+]
+
+[project.optional-dependencies]
+dev = ["black", "isort", "pylint"]
+
+[tool.black]
+line-length = 100
+target-version = ['py312']
+
+[tool.isort]
+profile = "black"
+line_length = 100
+
+[tool.pylint.'MESSAGES CONTROL']
+disable = ["C0114"]

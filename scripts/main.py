@@ -37,6 +37,8 @@ LOGGING_CONFIG = {
 
 
 def main():
+    """Analyze FRAP movies of tricellular junctions"""
+
     logging.config.dictConfig(LOGGING_CONFIG)
     logger = logging.getLogger()
 
