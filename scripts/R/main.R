@@ -9,9 +9,9 @@ source_folder <- file.path("scripts", "R")
 
 ## Load helper functions =======================================================
 
-source("./scripts/R/helpers/_theme.R")
-source("./scripts/R/helpers/_plot_template.R")
-source("./scripts/R/helpers/_panel.error.R")
+source(file.path(source_folder, "helpers", "_theme.R"))
+source(file.path(source_folder, "helpers", "_plot_template.R"))
+source(file.path(source_folder, "helpers", "_panel.error.R"))
 
 
 ## Define script-wide constants ================================================
